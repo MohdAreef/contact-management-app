@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import ContactForm from './ContactForm'; 
 
+import { CONTACTS_URL, CONTACT_DETAILS_URL } from '../apiConfig'; // Import URLs
+
 function Body() {
   const [contacts, setContacts] = useState([]);
   const [contactId, setContactId] = useState('');
@@ -39,7 +41,7 @@ const token = localStorage.getItem('token');
             },
           };
 
-          const response = await axios.get('http://localhost:9080/api/contacts', config);
+          const response = await axios.get(CONTACTS_URL, config);
           setContacts(response.data);
         } else {
           // Handle case where token is not present (e.g., redirect to login)
@@ -67,7 +69,7 @@ const token = localStorage.getItem('token');
         Authorization: `Bearer ${token}`,
       },
     };
-    axios.delete(`http://localhost:9080/api/contacts/${id}`, config).then(() => {
+    axios.delete(CONTACT_DETAILS_URL(id), config).then(() => {
       setContacts(contacts.filter((contact) => contact._id !== id));
     });
   };
@@ -82,7 +84,7 @@ const token = localStorage.getItem('token');
     };
 
     try {
-      const response = await axios.post('http://localhost:9080/api/contacts', newContact, config);
+      const response = await axios.post(CONTACTS_URL, newContact, config);
       setContacts([...contacts, response.data]);
       setNewContact({ name: '', email: '', phone: '' });
       setShowAddContactForm(false);

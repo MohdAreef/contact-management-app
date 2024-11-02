@@ -3,6 +3,9 @@ import './Body.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+import { CONTACTS_URL, CONTACT_DETAILS_URL } from '../apiConfig'; // Import URLs
+
 function ContactForm({ contactId, setContactId }) {
 
     const navigate = useNavigate();
@@ -19,7 +22,7 @@ function ContactForm({ contactId, setContactId }) {
 
     try {
         console.log(contactId);
-      const response = await axios.put(`http://localhost:9080/api/contacts/${contactId}`, newContact, config);
+      const response = await axios.put(CONTACT_DETAILS_URL(contactId), newContact, config);
     //    setContacts((prevContacts) => [...prevContacts, response.data]);
       setNewContact({ name: '', email: '', phone: '' });
       setShowAddContactForm(false);

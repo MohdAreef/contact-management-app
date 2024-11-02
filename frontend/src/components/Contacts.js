@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { CONTACTS_URL, CONTACT_DETAILS_URL } from '../apiConfig'; // Import URLs
+
 function Contacts() {
   const [contacts, setContacts] = useState([]);
   const [contactId, setContactId] = useState('');
@@ -21,7 +23,7 @@ function Contacts() {
             },
           };
 
-          const response = await axios.get('http://localhost:9080/api/contacts', config);
+          const response = await axios.get(CONTACTS_URL, config);
           setContacts(response.data);
         } else {
           // Handle case where token is not present (e.g., redirect to login)
@@ -50,7 +52,7 @@ function Contacts() {
           Authorization: `Bearer ${token}`,
         },
       };
-    axios.delete(`http://localhost:9080/api/contacts/${id}`,config).then(() => {
+    axios.delete(CONTACT_DETAILS_URL(id),config).then(() => {
       setContacts(contacts.filter((contact) => contact._id !== id));
     });
   };

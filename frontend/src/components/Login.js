@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+import { CONTACTS_URL, CONTACT_DETAILS_URL ,LOGIN_URL} from '../apiConfig'; // Import URLs
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +13,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:9080/api/users/login', { email, password });
+      const response = await axios.post(LOGIN_URL, { email, password });
       // Save token to local storage
       const token = response.data.token;
       localStorage.setItem('token', token);

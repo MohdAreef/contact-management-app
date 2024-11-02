@@ -13,8 +13,6 @@ const getcontacts= asyncHandler(async (req,res) =>{
 
             res.status(200).json(contacts);
         }
-    
-    
     // res.send("response from contacts server get response");
 });
 
@@ -86,8 +84,6 @@ const putcontacts=asyncHandler( async (req,res) =>{
 
 const deletecontacts= asyncHandler( async (req,res) =>{
     const id = req.params.id;
-
-    
 
     // Fetch the contact by ID
     const contact = await User.findById(id);

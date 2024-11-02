@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'
+import { REGISTER_URL} from '../apiConfig'; // Import URLs
 function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:9080/api/users/register', { username, email, password });
+      const response = await axios.post(REGISTER_URL, { username, email, password });
       // Handle registration success, e.g., redirect to login
       navigate('/login');
     } catch (error) {
